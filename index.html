@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banacraft: Teljes ingatlankiürítés a pincétől a padlásig | Budapest és környéke</title>
+  <meta name="description" content="Teljes ingatlankiürítés: pakolás, szétszerelés, rakodás, elszállítás és rendezett, seprűtiszta átadás, egy kézből, fix áron. Kérjen előzetes árat fotó vagy videó alapján. Budapest, Pest, Fejér, Nógrád vármegye." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            pine:  { DEFAULT: '#14312A', 900: '#0E241E', 800: '#14312A', 700: '#1E463C', 600: '#2A5A4C' },
+            ivory: { DEFAULT: '#F4EFE6', 200: '#F4EFE6', 300: '#E9E1D2' },
+            amber: { DEFAULT: '#E0913C', 600: '#CF7F27', 500: '#E0913C', 400: '#EBA75B' },
+          },
+          borderRadius: { '4xl': '2rem' },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root { --pine:#14312A; --ivory:#F4EFE6; --amber:#E0913C; }
+    body { background:var(--ivory); color:var(--pine); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Fraunces',serif; font-optical-sizing:auto; }
+
+    .grain { background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px); background-size:4px 4px; }
+    .hero-glow { background:
+        radial-gradient(60% 55% at 78% 18%, rgba(224,145,60,.28), transparent 60%),
+        radial-gradient(55% 60% at 12% 88%, rgba(42,90,76,.55), transparent 60%); }
+
+    /* Visible by default, hidden only once JS confirms the reveal observer is running.
+       This guarantees the page is never blank if the CDN or JS fails to load. */
+    .js .reveal { opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+    .js .reveal.in { opacity:1; transform:none; }
+
+    .rule { height:1px; background:linear-gradient(90deg, transparent, rgba(20,49,42,.25), transparent); }
+
+    details > summary { list-style:none; cursor:pointer; }
+    details > summary::-webkit-details-marker { display:none; }
+    details[open] .faq-plus { transform:rotate(45deg); }
+
+    .btn-cta { box-shadow:0 10px 30px -8px rgba(224,145,60,.6); }
+    .btn-cta:hover { box-shadow:0 14px 38px -8px rgba(224,145,60,.7); }
+
+    ::selection { background:var(--amber); color:var(--pine); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .js .reveal { opacity:1 !important; transform:none !important; transition:none; }
+      html { scroll-behavior:auto; }
+      .floaty, .live-dot, .scroll-dot { animation:none !important; }
+    }
+
+    @keyframes floaty { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-10px) } }
+    .floaty { animation:floaty 6s ease-in-out infinite; }
+    @keyframes pulseDot { 0%,100%{ opacity:1; transform:scale(1)} 50%{opacity:.35; transform:scale(.85)} }
+    .live-dot { animation:pulseDot 1.8s ease-in-out infinite; }
+    @keyframes scrollDot { 0%{ opacity:0; transform:translateY(0) } 40%{opacity:1} 80%,100%{ opacity:0; transform:translateY(10px) } }
+    .scroll-dot { animation:scrollDot 1.8s ease-in-out infinite; }
+
+    /* before/after slider */
+    .ba-range { -webkit-appearance:none; appearance:none; background:transparent; }
+    .ba-range::-webkit-slider-thumb { -webkit-appearance:none; width:2px; height:0; }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-white/10 bg-pine/85 px-5 py-2.5 text-ivory backdrop-blur-md md:px-6">
+      <a href="#top" class="flex items-center">
+        <img src="logo-ondark.png" alt="Banacraft" class="h-10 w-auto sm:h-11" />
+      </a>
+
+      <div class="hidden items-center gap-8 text-sm font-medium text-ivory/70 lg:flex">
+        <a href="#szolgaltatasok" class="transition-colors hover:text-ivory">Szolgáltatások</a>
+        <a href="#folyamat" class="transition-colors hover:text-ivory">Hogyan dolgozunk</a>
+        <a href="#velemenyek" class="transition-colors hover:text-ivory">Vélemények</a>
+      </div>
+
+      <div class="flex items-center gap-3 sm:gap-5">
+        <a href="tel:+36706252014" class="hidden items-center gap-2 text-sm font-semibold text-ivory/90 transition-colors hover:text-ivory md:flex">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +36 70 625 2014
+        </a>
+        <a href="#ajanlat" class="btn-cta group inline-flex cursor-pointer items-center gap-2 rounded-full bg-amber px-5 py-2.5 text-sm font-semibold text-pine transition-transform duration-200 hover:bg-amber-600 active:scale-95">
+          Ingyenes ajánlat
+          <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="top" class="relative flex min-h-screen items-center overflow-hidden bg-pine text-ivory">
+    <div class="absolute inset-0 hero-glow"></div>
+    <div class="absolute inset-0 grain"></div>
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=70"
+         alt="Kiürített, rendezett lakótér" loading="eager"
+         class="pointer-events-none absolute right-0 top-0 hidden h-full w-1/2 object-cover opacity-20 mix-blend-luminosity [mask-image:linear-gradient(to_left,black,transparent)] lg:block" />
+
+    <div class="relative mx-auto w-full max-w-6xl px-6 pb-16 pt-32 md:pt-28">
+      <div class="grid items-stretch gap-12 lg:grid-cols-[1.02fr_.98fr] lg:gap-16">
+        <div class="flex max-w-2xl flex-col justify-center">
+        <span class="inline-flex w-fit items-center gap-2 rounded-full border border-ivory/15 bg-ivory/5 px-3.5 py-1.5 text-xs font-medium tracking-wide text-ivory/80 backdrop-blur">
+          <span class="live-dot h-1.5 w-1.5 rounded-full bg-amber"></span>
+          Non-stop elérhető · Budapest, Pest, Fejér és Nógrád vármegye
+        </span>
+
+        <h1 class="mt-7 font-display text-5xl font-500 leading-[1.03] tracking-tight sm:text-6xl md:text-[4.2rem]">
+          Ne egyedül<br />
+          ürítsen ki egy<br />
+          <span class="italic text-amber-400">egész ingatlant.</span>
+        </h1>
+
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-ivory/75 sm:text-lg">
+          Teljes ingatlankiürítés a pincétől a padlásig, pakolással, szétszereléssel, elszállítással és rendezett átadással. <strong class="text-ivory">Ön csak megmutatja az ingatlant, a többit mi elintézzük.</strong>
+        </p>
+
+        <ul class="mt-8 space-y-4 text-[15px] text-ivory/80">
+          <li class="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Fix ár, nincs utólagos meglepetés
+          </li>
+          <li class="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Engedéllyel, legális lerakás
+          </li>
+          <li class="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 12 3 4 7v10l8 4 8-4z"/><path d="m12 12 8-4"/><path d="M12 12v9"/><path d="m4 8 8 4"/></svg>
+            Rendezett, seprűtiszta átadás
+          </li>
+        </ul>
+
+        <div class="mt-9 flex items-center gap-3 text-sm text-ivory/70">
+          <a href="tel:+36706252014" class="inline-flex items-center gap-2 font-semibold text-ivory transition-colors hover:text-amber-400">
+            <svg viewBox="0 0 24 24" class="h-4 w-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +36 70 625 2014
+          </a>
+          <span class="text-ivory/25">·</span>
+          <span>vagy töltse ki az űrlapot</span>
+        </div>
+      </div>
+
+        <!-- hero: ajánlatkérő űrlap (fő konverziós pont) -->
+        <div id="ajanlat" class="reveal flex h-full flex-col justify-center rounded-4xl border border-ivory/10 bg-ivory p-6 text-left shadow-2xl shadow-black/30 sm:p-8">
+          <div class="mb-6">
+            <h2 class="font-display text-2xl font-600 text-pine sm:text-3xl">Kérjen előzetes árat</h2>
+            <p class="mt-2 text-sm leading-relaxed text-pine/60">Fotó vagy videó alapján, pár perc, kötelezettség nélkül. Általában néhány órán belül válaszolunk.</p>
+          </div>
+          <form class="space-y-5" onsubmit="return false;">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="nev" class="mb-1 block text-sm font-medium text-pine">Név *</label>
+                <input id="nev" type="text" required class="w-full rounded-xl border border-pine/15 bg-ivory/40 px-4 py-3 text-pine outline-none transition-colors focus:border-amber focus:bg-white focus:ring-2 focus:ring-amber/30" placeholder="Kiss Anna" />
+              </div>
+              <div>
+                <label for="tel" class="mb-1 block text-sm font-medium text-pine">Telefonszám *</label>
+                <input id="tel" type="tel" required class="w-full rounded-xl border border-pine/15 bg-ivory/40 px-4 py-3 text-pine outline-none transition-colors focus:border-amber focus:bg-white focus:ring-2 focus:ring-amber/30" placeholder="+36 …" />
+              </div>
+            </div>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="telepules" class="mb-1 block text-sm font-medium text-pine">Település *</label>
+                <input id="telepules" type="text" required class="w-full rounded-xl border border-pine/15 bg-ivory/40 px-4 py-3 text-pine outline-none transition-colors focus:border-amber focus:bg-white focus:ring-2 focus:ring-amber/30" placeholder="Pl. Budapest, XIV. ker." />
+              </div>
+              <div>
+                <label for="tipus" class="mb-1 block text-sm font-medium text-pine">Ingatlan típusa</label>
+                <select id="tipus" class="w-full cursor-pointer rounded-xl border border-pine/15 bg-ivory/40 px-4 py-3 text-pine outline-none transition-colors focus:border-amber focus:bg-white focus:ring-2 focus:ring-amber/30">
+                  <option value="">Válasszon…</option>
+                  <option>Lakás</option><option>Családi ház</option><option>Nyaraló</option>
+                  <option>Iroda / üzlet</option><option>Garázs / tároló</option><option>Pince / padlás</option><option>Egyéb</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="mb-1 block text-sm font-medium text-pine">Fotók / videó a helyiségekről</label>
+              <label for="fajl" class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-pine/20 bg-ivory/40 px-4 py-7 text-center transition-colors hover:border-amber hover:bg-amber/5">
+                <svg viewBox="0 0 24 24" class="h-8 w-8 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg>
+                <span class="text-sm font-medium text-pine">Húzza ide, vagy tallózzon</span>
+                <span class="text-xs text-pine/50">Ez alapján adunk gyors, előzetes árat</span>
+                <input id="fajl" type="file" accept="image/*,video/*" multiple class="hidden" />
+              </label>
+            </div>
+            <div>
+              <label for="uzenet" class="mb-1 block text-sm font-medium text-pine">Mit kell kiüríteni? (röviden)</label>
+              <textarea id="uzenet" rows="2" class="w-full rounded-xl border border-pine/15 bg-ivory/40 px-4 py-3 text-pine outline-none transition-colors focus:border-amber focus:bg-white focus:ring-2 focus:ring-amber/30" placeholder="Pl. teljes lakás, pincével együtt"></textarea>
+            </div>
+            <button type="submit" class="btn-cta w-full cursor-pointer rounded-full bg-amber px-7 py-3.5 text-base font-semibold text-pine transition-all duration-200 hover:bg-amber-600 active:scale-[.99]">
+              Előzetes árat kérek
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-ivory"></div>
+  </section>
+
+  <!-- ================= STATS BAR ================= -->
+  <section class="relative z-10 mx-auto -mt-10 max-w-5xl px-6">
+    <div class="reveal grid grid-cols-2 gap-px overflow-hidden rounded-4xl border border-pine/10 bg-pine/10 shadow-xl shadow-pine/5 md:grid-cols-4">
+      <div class="bg-ivory p-6 text-center">
+        <div class="font-display text-4xl font-600 text-pine">Egy kézből</div>
+        <div class="mt-1 text-sm text-pine/60">a felméréstől az átadásig</div>
+      </div>
+      <div class="bg-ivory p-6 text-center">
+        <div class="font-display text-4xl font-600 text-pine">Fix ár</div>
+        <div class="mt-1 text-sm text-pine/60">előre, rejtett költség nélkül</div>
+      </div>
+      <div class="bg-ivory p-6 text-center">
+        <div class="font-display text-4xl font-600 text-pine">Fotó&nbsp;→&nbsp;ár</div>
+        <div class="mt-1 text-sm text-pine/60">nem kell azonnal helyszín</div>
+      </div>
+      <div class="bg-ivory p-6 text-center">
+        <div class="font-display text-4xl font-600 text-pine">Non-stop</div>
+        <div class="mt-1 text-sm text-pine/60">a hét minden napján</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AI ÁRBECSLŐ SÁV ================= -->
+  <section class="mx-auto max-w-5xl px-6 pt-12">
+    <div class="reveal flex flex-col items-center gap-5 rounded-4xl border border-pine/10 bg-white/70 p-7 text-center shadow-lg shadow-pine/5 sm:flex-row sm:justify-between sm:text-left sm:p-8">
+      <div class="flex items-start gap-4">
+        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-amber/15 text-amber-600">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9L12 2z"/></svg>
+        </span>
+        <div>
+          <h2 class="font-display text-xl font-600 text-pine sm:text-2xl">Nem szeretne a visszahívásra várni?</h2>
+          <p class="mt-1.5 max-w-xl text-[15px] leading-relaxed text-pine/65">AI árbecslőnk feltesz néhány rövid kérdést a helyzetéről, és <strong class="text-pine">azonnal ad egy hozzávetőleges árat</strong>, ingyen, kötelezettség nélkül.</p>
+        </div>
+      </div>
+      <a href="#ajanlat" data-quote-agent class="btn-cta inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-amber px-7 py-3.5 text-base font-semibold text-pine transition-transform duration-200 hover:bg-amber-600 active:scale-95">
+        Kipróbálom
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= AZ ÖN HELYZETE ================= -->
+  <section id="helyzet" class="mx-auto max-w-6xl px-6 py-24">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">Milyen helyzetben van?</span>
+      <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Ismerős valamelyik?</h2>
+      <p class="mt-4 text-lg text-pine/70">Bármelyik is az Öné, a megoldás ugyanaz: átadja nekünk, mi kiürítjük és rendezetten visszaadjuk.</p>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- helyzet card -->
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-7 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-pine text-amber-400">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 21V11h14v10"/><path d="M9 21v-6h6v6"/></svg>
+        </span>
+        <h3 class="mt-5 font-display text-xl font-600">Eladás előtt áll az ingatlan</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-pine/70">Kiürítjük a házat vagy lakást, hogy megmutatható, átadható, eladható állapotba kerüljön.</p>
+      </div>
+
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-7 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-pine text-amber-400">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16"/><path d="M6 22V10a6 6 0 0 1 12 0v12"/><path d="M9 22v-6h6v6"/></svg>
+        </span>
+        <h3 class="mt-5 font-display text-xl font-600">Örökölt egy ingatlant</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-pine/70">A hagyatékból maradt bútorokat, tárgyakat és lomokat tapintatosan, diszkréten elszállítjuk.</p>
+      </div>
+
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-7 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-pine text-amber-400">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+        </span>
+        <h3 class="mt-5 font-display text-xl font-600">Költözés előtt áll</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-pine/70">Amit nem visz magával, azt eltávolítjuk, Önnek nem kell a felesleggel bajlódnia.</p>
+      </div>
+
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-7 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-pine text-amber-400">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </span>
+        <h3 class="mt-5 font-display text-xl font-600">Felújítás kezdődik</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-pine/70">Kiürítjük a helyiségeket, a pincét, a padlást és a garázst, hogy tiszta lappal indulhasson.</p>
+      </div>
+
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-7 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-pine text-amber-400">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 21V8l6-5 6 5v13"/><path d="M10 21v-4h4v4"/><path d="M10 12h.01M14 12h.01"/></svg>
+        </span>
+        <h3 class="mt-5 font-display text-xl font-600">Régi, lakatlan háza van</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-pine/70">Az évek alatt felgyűlt tartalom teljes kiürítését vállaljuk, a pincétől a padlásig.</p>
+      </div>
+
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-7 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-pine text-amber-400">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14"/><path d="M9 9h.01M13 9h.01M9 13h.01M13 13h.01M9 17h.01M13 17h.01"/></svg>
+        </span>
+        <h3 class="mt-5 font-display text-xl font-600">Irodát, üzletet, raktárt ürítene</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-pine/70">A teljes berendezés eltávolítását megszervezzük, gyorsan, számlával, ütemezve.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VÉLEMÉNYEK (social proof, magasra helyezve) ================= -->
+  <section id="velemenyek" class="bg-pine text-ivory">
+    <div class="mx-auto max-w-6xl px-6 py-24">
+      <div class="reveal mx-auto max-w-2xl text-center">
+        <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">Vélemények</span>
+        <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Százak bízták már ránk<br class="hidden sm:block" /> a legnehezebb napjukat</h2>
+        <div class="mt-6 inline-flex items-center gap-3 rounded-full border border-ivory/15 bg-ivory/[.04] px-5 py-2.5">
+          <div class="flex gap-1 text-amber-400">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-ivory">5,0</span>
+          <span class="h-4 w-px bg-ivory/20"></span>
+          <span class="text-sm text-ivory/70">valós ügyfélvélemények</span>
+        </div>
+        <p class="mt-5 text-[15px] leading-relaxed text-ivory/70">Nem reklámszöveg, igazi családok, akiknek hagyaték, költözés vagy eladás előtt segítettünk. Olvassa el, hogyan.</p>
+      </div>
+
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        <!-- 1 -->
+        <figure class="reveal flex flex-col rounded-3xl border border-ivory/10 bg-ivory/[.04] p-7">
+          <div class="flex gap-1 text-amber-400">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+          </div>
+          <blockquote class="mt-4 flex-1 text-[15px] leading-relaxed text-ivory/80">„Édesanyám lakását kellett kiürítenünk, és nem bírtuk volna egyedül. Fotókat küldtem, másnap jött az ár, harmadnap üres volt a lakás. Emberségesen, tapintattal dolgoztak.”</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-amber font-display text-sm font-600 text-pine">KZ</span>
+            <div><div class="text-sm font-semibold text-ivory">Kovács Zsuzsanna</div><div class="text-xs text-ivory/50">Hagyatéki lakás · Budapest</div></div>
+          </figcaption>
+        </figure>
+        <!-- 2 -->
+        <figure class="reveal flex flex-col rounded-3xl border border-ivory/10 bg-ivory/[.04] p-7">
+          <div class="flex gap-1 text-amber-400">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+          </div>
+          <blockquote class="mt-4 flex-1 text-[15px] leading-relaxed text-ivory/80">„Eladtam a panellakást, de tele volt a régi tulaj bútoraival, negyedik emelet, lift nélkül. Fél nap alatt mindent lehordtak. Az ár pontosan annyi lett, amennyit előre mondtak.”</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-amber font-display text-sm font-600 text-pine">NG</span>
+            <div><div class="text-sm font-semibold text-ivory">Nagy Gábor</div><div class="text-xs text-ivory/50">Eladás előtti kiürítés · Érd</div></div>
+          </figcaption>
+        </figure>
+        <!-- 3 -->
+        <figure class="reveal flex flex-col rounded-3xl border border-ivory/10 bg-ivory/[.04] p-7">
+          <div class="flex gap-1 text-amber-400">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+          </div>
+          <blockquote class="mt-4 flex-1 text-[15px] leading-relaxed text-ivory/80">„Külföldön élek, a nagyszüleim házát kellett kiüríteni. A kulcsot a szomszédnál hagytam, ők mindent elintéztek, és videón megküldték a végeredményt. Óriási segítség volt.”</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-amber font-display text-sm font-600 text-pine">TA</span>
+            <div><div class="text-sm font-semibold text-ivory">Tóth András</div><div class="text-xs text-ivory/50">Házkiürítés távolról · Fejér vm.</div></div>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="reveal mt-12 flex flex-col items-center gap-4 text-center">
+        <p class="text-[15px] text-ivory/70">Az Öné lehet a következő megkönnyebbült ügyfél.</p>
+        <a href="#ajanlat" class="inline-flex items-center gap-2 rounded-full bg-amber px-7 py-3.5 font-semibold text-pine transition-transform hover:-translate-y-0.5">
+          Kérek egy ingyenes árajánlatot
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="text-xs text-ivory/50">Fotó alapján, kötelezettség nélkül, általában pár órán belül válaszolunk.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SZOLGÁLTATÁSOK ================= -->
+  <section id="szolgaltatasok" class="mx-auto max-w-6xl px-6 pb-8">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">Szolgáltatások</span>
+      <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Amiben segíteni tudunk</h2>
+      <p class="mt-4 text-lg text-pine/70">Nem csak néhány bútort viszünk el. Ha kell, a teljes ingatlant kiürítjük, a pincétől a padlásig.</p>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-6 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-pine text-amber-400"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></span>
+        <h3 class="mt-4 font-display text-lg font-600">Lakáskiürítés</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Teljes lakás kiürítése, bútorral és gépekkel együtt.</p>
+      </div>
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-6 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-pine text-amber-400"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 21V11h14v10"/><path d="M9 21v-6h6v6"/></svg></span>
+        <h3 class="mt-4 font-display text-lg font-600">Házkiürítés</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Családi ház a pincétől a padlásig, udvarral együtt.</p>
+      </div>
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-6 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-pine text-amber-400"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></span>
+        <h3 class="mt-4 font-display text-lg font-600">Hagyatékkiürítés</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Diszkrét, tapintatos, teljes körű megoldás.</p>
+      </div>
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-6 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-pine text-amber-400"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 21V10l6-4 6 4v11"/><path d="M10 21v-5h4v5"/></svg></span>
+        <h3 class="mt-4 font-display text-lg font-600">Pince- és padláskiürítés</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">A nehezen megközelíthető helyekre is bemegyünk.</p>
+      </div>
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-6 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-pine text-amber-400"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span>
+        <h3 class="mt-4 font-display text-lg font-600">Garázs- és műhelykiürítés</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Régi szerszámok, gépek, bútorok elszállítása.</p>
+      </div>
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-6 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-pine text-amber-400"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14"/><path d="M9 9h.01M13 9h.01M9 13h.01M13 13h.01"/></svg></span>
+        <h3 class="mt-4 font-display text-lg font-600">Iroda- és üzletkiürítés</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Teljes berendezés eltávolítása, számlával, ütemezve.</p>
+      </div>
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-6 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-pine text-amber-400"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 12 2l10 20z" opacity=".0"/><path d="M4 20h16"/><path d="M7 20c0-4 2-7 5-7s5 3 5 7"/><path d="M12 13V4"/><path d="M9 6h6"/></svg></span>
+        <h3 class="mt-4 font-display text-lg font-600">Telek- és udvarkiürítés</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Kültéri lom, kerti bútor, zöldhulladék elszállítása.</p>
+      </div>
+      <div class="reveal group rounded-3xl border border-pine/10 bg-white/60 p-6 transition-colors duration-200 hover:border-amber/40">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-pine text-amber-400"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="13" height="10" rx="1"/><path d="M16 12h3l2 3v3h-5"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span>
+        <h3 class="mt-4 font-display text-lg font-600">Bútorelszállítás</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Akár egyetlen nagyméretű darab elvitele is.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MIT VESZÜNK LE A VÁLLÁRÓL ================= -->
+  <section class="bg-pine text-ivory">
+    <div class="mx-auto max-w-6xl px-6 py-24">
+      <div class="grid gap-14 lg:grid-cols-2 lg:items-center">
+        <div class="reveal">
+          <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">Miért ne csinálja egyedül?</span>
+          <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">
+            A valódi teher nem<br />egy szekrény. Hanem az egész.
+          </h2>
+          <p class="mt-6 text-lg leading-relaxed text-ivory/70">
+            Egy teherautó bérlése még a könnyebbik része. A napokba telő pakolás, cipelés és szervezés az,
+            ami kimeríti. Nálunk ez a rész eltűnik, Önről lekerül az egész.
+          </p>
+          <a href="#ajanlat" class="btn-cta mt-8 inline-flex cursor-pointer items-center gap-2 rounded-full bg-amber px-7 py-4 text-base font-semibold text-pine transition-transform duration-200 hover:bg-amber-600 active:scale-95">
+            Vegyék le a vállamról
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="reveal rounded-4xl border border-ivory/10 bg-ivory/[.04] p-8">
+          <p class="text-sm font-semibold uppercase tracking-widest text-ivory/50">Önnek nem kell:</p>
+          <ul class="mt-5 grid gap-x-6 gap-y-3.5 sm:grid-cols-2">
+            <!-- item -->
+            <li class="flex items-center gap-3 text-ivory/85"><svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>pakolnia, zsákolnia</li>
+            <li class="flex items-center gap-3 text-ivory/85"><svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>bútorokat cipelnie</li>
+            <li class="flex items-center gap-3 text-ivory/85"><svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>szekrényt szétszednie</li>
+            <li class="flex items-center gap-3 text-ivory/85"><svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>lépcsőn hordania</li>
+            <li class="flex items-center gap-3 text-ivory/85"><svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>konténert szerveznie</li>
+            <li class="flex items-center gap-3 text-ivory/85"><svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>fuvarost keresnie</li>
+            <li class="flex items-center gap-3 text-ivory/85"><svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>hulladékot válogatnia</li>
+            <li class="flex items-center gap-3 text-ivory/85"><svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>lerakóba járnia</li>
+          </ul>
+          <div class="mt-6 rounded-2xl bg-amber/15 p-4 text-center text-[15px] font-medium text-amber-400">
+            Ön csak megmutatja az ingatlant. A többi a mi dolgunk.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MIT VISZÜNK EL / MIT NEM ================= -->
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">Átláthatóan</span>
+      <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Mit viszünk el, és mit nem</h2>
+    </div>
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-2">
+      <!-- viszünk -->
+      <div class="reveal rounded-4xl border border-pine/10 bg-white/60 p-8">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-pine text-amber-400">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <h3 class="font-display text-2xl font-600">Amit elszállítunk</h3>
+        </div>
+        <div class="mt-6 grid gap-6 sm:grid-cols-2">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-widest text-pine/45">Bútorok</p>
+            <p class="mt-2 text-[15px] leading-relaxed text-pine/70">szekrények, ágyak, kanapék, asztalok, székek, komódok</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-widest text-pine/45">Háztartási gépek</p>
+            <p class="mt-2 text-[15px] leading-relaxed text-pine/70">mosógép, hűtő, tűzhely és egyéb gépek</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-widest text-pine/45">Lom, apró tárgyak</p>
+            <p class="mt-2 text-[15px] leading-relaxed text-pine/70">dobozok, ruhák, könyvek, szőnyegek, matracok</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-widest text-pine/45">Pince, padlás, udvar</p>
+            <p class="mt-2 text-[15px] leading-relaxed text-pine/70">régi bútorok, szerszámok, kerti bútor, tárolók tartalma</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- nem viszünk -->
+      <div class="reveal rounded-4xl border border-amber/30 bg-amber/[.06] p-8">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-amber text-pine">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          </span>
+          <h3 class="font-display text-2xl font-600">Amit külön kezelünk</h3>
+        </div>
+        <p class="mt-6 text-[15px] leading-relaxed text-pine/70">
+          Bizonyos anyagok speciális, engedélyköteles kezelést igényelnek. Ezeket nem keverjük a normál lommal, szólunk előre, és megmondjuk a helyes megoldást:
+        </p>
+        <ul class="mt-5 space-y-2.5 text-[15px] text-pine/80">
+          <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-amber-600"></span>veszélyes hulladékok, vegyszerek</li>
+          <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-amber-600"></span>egyes festékek, oldószerek</li>
+          <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-amber-600"></span>azbeszttartalmú anyagok</li>
+          <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-amber-600"></span>egyéb speciális kezelést igénylő anyagok</li>
+        </ul>
+        <p class="mt-5 text-sm text-pine/55">Nem ígérünk mindent, inkább őszintén megmondjuk, mihez milyen kezelés kell, és melyik szakpartnerhez érdemes fordulni.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOGYAN DOLGOZUNK (8 lépés) ================= -->
+  <section id="folyamat" class="bg-pine text-ivory">
+    <div class="mx-auto max-w-6xl px-6 py-24">
+      <div class="reveal max-w-2xl">
+        <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">Hogyan dolgozunk</span>
+        <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Nem egy teherautót küldünk. A teljes feladatot megszervezzük.</h2>
+      </div>
+
+      <div class="mt-16 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="reveal"><div class="font-display text-5xl font-500 text-amber-400/30">01</div><h3 class="mt-3 font-display text-lg font-600">Felmérjük</h3><p class="mt-2 text-[15px] leading-relaxed text-ivory/65">Fotó, videó vagy helyszín alapján, díjmentesen.</p></div>
+        <div class="reveal"><div class="font-display text-5xl font-500 text-amber-400/30">02</div><h3 class="mt-3 font-display text-lg font-600">Fix árat adunk</h3><p class="mt-2 text-[15px] leading-relaxed text-ivory/65">Előre, a rakodási körülmények ismeretében.</p></div>
+        <div class="reveal"><div class="font-display text-5xl font-500 text-amber-400/30">03</div><h3 class="mt-3 font-display text-lg font-600">Szétszereljük</h3><p class="mt-2 text-[15px] leading-relaxed text-ivory/65">Bútorbontás, ami a mozgatáshoz szükséges.</p></div>
+        <div class="reveal"><div class="font-display text-5xl font-500 text-amber-400/30">04</div><h3 class="mt-3 font-display text-lg font-600">Felrakodunk</h3><p class="mt-2 text-[15px] leading-relaxed text-ivory/65">Emeletről, lift nélkül is, a fizikai munka a miénk.</p></div>
+        <div class="reveal"><div class="font-display text-5xl font-500 text-amber-400/30">05</div><h3 class="mt-3 font-display text-lg font-600">Elszállítunk</h3><p class="mt-2 text-[15px] leading-relaxed text-ivory/65">Több kocsival, akár nagyobb mennyiséget is.</p></div>
+        <div class="reveal"><div class="font-display text-5xl font-500 text-amber-400/30">06</div><h3 class="mt-3 font-display text-lg font-600">Kezeljük a hulladékot</h3><p class="mt-2 text-[15px] leading-relaxed text-ivory/65">Engedéllyel, jogszabály szerinti lerakóba.</p></div>
+        <div class="reveal"><div class="font-display text-5xl font-500 text-amber-400/30">07</div><h3 class="mt-3 font-display text-lg font-600">Rendezünk</h3><p class="mt-2 text-[15px] leading-relaxed text-ivory/65">Seprűtiszta, rendezett állapot a végén.</p></div>
+        <div class="reveal"><div class="font-display text-5xl font-500 text-amber-400/30">08</div><h3 class="mt-3 font-display text-lg font-600">Átadjuk</h3><p class="mt-2 text-[15px] leading-relaxed text-ivory/65">Az ingatlant átadásra, eladásra előkészítve.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MIT KAP A VÉGÉN ================= -->
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <div class="grid items-center gap-14 lg:grid-cols-2">
+      <div class="reveal relative order-2 lg:order-1">
+        <div class="overflow-hidden rounded-4xl border border-pine/10 shadow-2xl shadow-pine/10">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=70" alt="Kiürített, rendezett, seprűtiszta lakótér" loading="lazy" class="h-full w-full object-cover" />
+        </div>
+        <div class="floaty absolute -bottom-6 -right-6 hidden rounded-3xl border border-pine/10 bg-ivory p-5 shadow-xl sm:block">
+          <div class="flex items-center gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-2xl bg-amber text-pine"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <div><div class="font-display text-lg font-600 leading-none text-pine">Seprűtiszta átadás</div><div class="mt-1 text-sm text-pine/60">Nem csak elvisszük, rendezünk is</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal order-1 lg:order-2">
+        <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">Mit kap a végén</span>
+        <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">A munka végén az ingatlan:</h2>
+        <ul class="mt-8 space-y-4">
+          <li class="flex items-center gap-4 text-lg text-pine/85"><svg viewBox="0 0 24 24" class="h-6 w-6 shrink-0 text-amber-600" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>kiürítve</li>
+          <li class="flex items-center gap-4 text-lg text-pine/85"><svg viewBox="0 0 24 24" class="h-6 w-6 shrink-0 text-amber-600" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>elszállítva</li>
+          <li class="flex items-center gap-4 text-lg text-pine/85"><svg viewBox="0 0 24 24" class="h-6 w-6 shrink-0 text-amber-600" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>megtisztítva, rendezve</li>
+          <li class="flex items-center gap-4 text-lg text-pine/85"><svg viewBox="0 0 24 24" class="h-6 w-6 shrink-0 text-amber-600" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>átadásra előkészítve</li>
+        </ul>
+        <p class="mt-6 text-[15px] text-pine/55">Az alap seprűtiszta átadás minden munkánk része. Ha ennél alaposabb, teljes körű takarítást is szeretne, azt előre egyeztetjük.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HAGYATÉK + ÉRTÉKTÁRGYAK ================= -->
+  <section id="hagyatek" class="relative overflow-hidden bg-pine text-ivory">
+    <div class="absolute inset-0 hero-glow opacity-60"></div>
+    <div class="absolute inset-0 grain"></div>
+    <div class="relative mx-auto max-w-6xl px-6 py-24">
+      <div class="grid gap-14 lg:grid-cols-2 lg:items-start">
+        <div class="reveal">
+          <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">Hagyatéki kiürítés</span>
+          <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Tapintattal, ahogy egy hagyaték megérdemli.</h2>
+          <p class="mt-6 text-lg leading-relaxed text-ivory/75">
+            Egy hagyatéki ingatlan sosem „csak lom”. Évtizednyi élet, személyes tárgyak, emlékek,
+            és sokszor egy külföldön élő vagy gyászoló hozzátartozó, akinek nincs ereje végigcsinálni.
+          </p>
+          <p class="mt-4 text-lg leading-relaxed text-ivory/75">
+            Diszkréten, a megbeszéltek szerint dolgozunk, egyetlen kapcsolattartóval. Ön nem 4 különböző emberrel egyeztet, csak velünk.
+          </p>
+        </div>
+
+        <div class="reveal rounded-4xl border border-ivory/10 bg-ivory/[.05] p-8">
+          <span class="grid h-12 w-12 place-items-center rounded-2xl bg-amber text-pine">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+          </span>
+          <h3 class="mt-5 font-display text-2xl font-600">Az értéktárgyakat nem dobjuk ki</h3>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">
+            Régi bútor, porcelán, ékszer, műtárgy, régiség, gyűjtemény, a még értéket képviselő tárgyakat
+            nem kezeljük automatikusan hulladékként. Egyeztetjük Önnel, mi legyen velük.
+          </p>
+          <div class="mt-6 rounded-2xl bg-ivory/10 p-4 text-[15px] text-ivory/85">
+            Igény szerint <strong class="text-amber-400">értékbeszámítás vagy felvásárlás</strong> is lehetséges, a még értékes tárgyak beszámítása érdemben csökkentheti a kiürítés végösszegét.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NEM KELL JELEN LENNIE ================= -->
+  <section class="mx-auto max-w-6xl px-6 py-20">
+    <div class="reveal flex flex-col items-center gap-8 rounded-[2.5rem] border border-pine/10 bg-white/60 p-10 text-center md:flex-row md:text-left">
+      <span class="grid h-16 w-16 shrink-0 place-items-center rounded-3xl bg-pine text-amber-400">
+        <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </span>
+      <div class="flex-1">
+        <h2 class="font-display text-3xl font-500 tracking-tight">Nem tud ott lenni? Nem probléma.</h2>
+        <p class="mt-2 max-w-2xl text-[17px] leading-relaxed text-pine/70">
+          Megbeszélés alapján a munkát az Ön jelenléte nélkül is elvégezzük, akár a kulcsot is ránk bízhatja.
+          Ideális öröklésnél, eladás előtti kiürítésnél vagy ha éppen külföldön él. Fotókkal és rövid videóval dokumentáljuk a munkát, hogy Ön távolról is nyomon követhesse.
+        </p>
+      </div>
+      <a href="#ajanlat" class="btn-cta shrink-0 cursor-pointer rounded-full bg-amber px-7 py-4 text-base font-semibold text-pine transition-transform duration-200 hover:bg-amber-600 active:scale-95">Egyeztetek</a>
+    </div>
+  </section>
+
+  <!-- ================= REFERENCIÁK: ELŐTTE / UTÁNA ================= -->
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">Referenciák</span>
+      <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Ilyen állapotból ilyen állapotba</h2>
+      <p class="mt-4 text-lg text-pine/70">Húzza a csúszkát, és nézze meg a különbséget egyetlen nap munkája után.</p>
+    </div>
+
+    <div class="reveal mx-auto mt-12 max-w-3xl">
+      <div id="ba" class="group relative aspect-[16/10] w-full select-none overflow-hidden rounded-4xl border border-pine/10 shadow-2xl shadow-pine/10">
+        <!-- UTÁNA (alsó réteg, teljes) -->
+        <img src="https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&w=1200&q=70" alt="Kiürítés után: rendezett, üres tér" class="absolute inset-0 h-full w-full object-cover" draggable="false" />
+        <span class="pointer-events-none absolute right-4 top-4 z-10 rounded-full bg-amber px-3 py-1 text-xs font-semibold text-pine">UTÁNA</span>
+
+        <!-- ELŐTTE (felső réteg, clip-path-tal takarva) -->
+        <div id="baTop" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
+          <img src="https://images.unsplash.com/photo-1520006403909-838d6b92c22e?auto=format&fit=crop&w=1200&q=70" alt="Kiürítés előtt: zsúfolt, telepakolt tér" class="absolute inset-0 h-full w-full object-cover" draggable="false" />
+          <span class="pointer-events-none absolute left-4 top-4 rounded-full bg-pine/80 px-3 py-1 text-xs font-semibold text-ivory backdrop-blur">ELŐTTE</span>
+        </div>
+
+        <!-- fogantyú -->
+        <div id="baHandle" class="pointer-events-none absolute top-0 z-10 h-full w-0.5 -translate-x-1/2 bg-ivory shadow-[0_0_0_1px_rgba(20,49,42,.2)]" style="left:50%;">
+          <span class="absolute top-1/2 left-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-ivory text-pine shadow-lg ring-4 ring-pine/5 transition-transform duration-200 group-hover:scale-110">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 6 6 6-6 6"/></svg>
+          </span>
+        </div>
+        <input id="baRange" type="range" min="0" max="100" value="50" aria-label="Előtte / utána összehasonlítás" class="ba-range absolute inset-0 z-20 h-full w-full cursor-ew-resize opacity-0" />
+      </div>
+    </div>
+
+    <!-- case studies -->
+    <div class="mt-16 grid gap-6 lg:grid-cols-3">
+      <!-- 1 -->
+      <div class="reveal flex flex-col rounded-4xl border border-pine/10 bg-white/60 p-8">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-full bg-pine px-3 py-1 text-xs font-semibold text-ivory">Hagyaték</span>
+          <span class="text-sm text-pine/50">Családi ház · 160 m²</span>
+        </div>
+        <div class="mt-6 space-y-4">
+          <div><p class="text-xs font-semibold uppercase tracking-widest text-amber-600">Kiindulás</p><p class="mt-1.5 text-[15px] leading-relaxed text-pine/70">Évtizedek alatt felhalmozott bútor, ruha és háztartási tárgy; tele pince és padlás.</p></div>
+          <div><p class="text-xs font-semibold uppercase tracking-widest text-amber-600">Munka</p><p class="mt-1.5 text-[15px] leading-relaxed text-pine/70">4 fő, 2 teherautó, 1 nap; néhány értékesebb tárgy külön kiválogatva, beszámítva.</p></div>
+        </div>
+        <div class="mt-6 rounded-2xl bg-pine/5 p-4"><p class="text-xs font-semibold uppercase tracking-widest text-pine/45">Eredmény</p><p class="mt-1.5 text-[15px] font-medium leading-relaxed text-pine">Kiürítve, seprűtisztán átadva, eladásra készen.</p></div>
+      </div>
+      <!-- 2 -->
+      <div class="reveal flex flex-col rounded-4xl border border-pine/10 bg-white/60 p-8">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-full bg-pine px-3 py-1 text-xs font-semibold text-ivory">Eladás előtt</span>
+          <span class="text-sm text-pine/50">Panellakás · 54 m² · IV. emelet</span>
+        </div>
+        <div class="mt-6 space-y-4">
+          <div><p class="text-xs font-semibold uppercase tracking-widest text-amber-600">Kiindulás</p><p class="mt-1.5 text-[15px] leading-relaxed text-pine/70">Berendezett lakás lift nélküli házban, teljes bútorzattal és gépekkel.</p></div>
+          <div><p class="text-xs font-semibold uppercase tracking-widest text-amber-600">Munka</p><p class="mt-1.5 text-[15px] leading-relaxed text-pine/70">2 fő, fél nap; bútorbontás és kézi lehordás a IV. emeletről.</p></div>
+        </div>
+        <div class="mt-6 rounded-2xl bg-pine/5 p-4"><p class="text-xs font-semibold uppercase tracking-widest text-pine/45">Eredmény</p><p class="mt-1.5 text-[15px] font-medium leading-relaxed text-pine">Üres, tiszta lakás, az ingatlanos még aznap fotózhatott.</p></div>
+      </div>
+      <!-- 3 -->
+      <div class="reveal flex flex-col rounded-4xl border border-pine/10 bg-white/60 p-8">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-full bg-pine px-3 py-1 text-xs font-semibold text-ivory">Iroda</span>
+          <span class="text-sm text-pine/50">Irodaház · 3 szint · céges</span>
+        </div>
+        <div class="mt-6 space-y-4">
+          <div><p class="text-xs font-semibold uppercase tracking-widest text-amber-600">Kiindulás</p><p class="mt-1.5 text-[15px] leading-relaxed text-pine/70">Kiköltöző cég: íróasztalok, székek, szekrények, elektronikai eszközök.</p></div>
+          <div><p class="text-xs font-semibold uppercase tracking-widest text-amber-600">Munka</p><p class="mt-1.5 text-[15px] leading-relaxed text-pine/70">5 fő, ütemezve munkaidőn kívül, hogy ne zavarja az üzemelést; számlával.</p></div>
+        </div>
+        <div class="mt-6 rounded-2xl bg-pine/5 p-4"><p class="text-xs font-semibold uppercase tracking-widest text-pine/45">Eredmény</p><p class="mt-1.5 text-[15px] font-medium leading-relaxed text-pine">Kiürített szintek, határidőre, a birtokátadásra készen.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BIZALOM ================= -->
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">Bizalom</span>
+      <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Miért bízhat ránk egy teljes ingatlant?</h2>
+      <p class="mt-4 text-lg text-pine/70">Idegenek lépnek be az otthonába, ezt komolyan vesszük.</p>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="reveal rounded-3xl border border-pine/10 bg-white/60 p-7">
+        <svg viewBox="0 0 24 24" class="h-7 w-7 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+        <h3 class="mt-4 font-display text-lg font-600">Azonosítható csapat</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Név, cég, elérhetőség, tudja, ki jön Önhöz.</p>
+      </div>
+      <div class="reveal rounded-3xl border border-pine/10 bg-white/60 p-7">
+        <svg viewBox="0 0 24 24" class="h-7 w-7 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/></svg>
+        <h3 class="mt-4 font-display text-lg font-600">Számla és szerződés</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Minden munkáról hivatalos számlát adunk, igény szerint írásos megállapodással.</p>
+      </div>
+      <div class="reveal rounded-3xl border border-pine/10 bg-white/60 p-7">
+        <svg viewBox="0 0 24 24" class="h-7 w-7 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <h3 class="mt-4 font-display text-lg font-600">Felelősségvállalás</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Érvényes hulladékszállítási engedéllyel és felelősséggel végezzük a munkát.</p>
+      </div>
+      <div class="reveal rounded-3xl border border-pine/10 bg-white/60 p-7">
+        <svg viewBox="0 0 24 24" class="h-7 w-7 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+        <h3 class="mt-4 font-display text-lg font-600">Diszkréció</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Különösen hagyatéknál, csendben, tapintattal.</p>
+      </div>
+      <div class="reveal rounded-3xl border border-pine/10 bg-white/60 p-7">
+        <svg viewBox="0 0 24 24" class="h-7 w-7 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <h3 class="mt-4 font-display text-lg font-600">Egy kapcsolattartó</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Nem 4 emberrel egyeztet, mindent egy kézben.</p>
+      </div>
+      <div class="reveal rounded-3xl border border-pine/10 bg-white/60 p-7">
+        <svg viewBox="0 0 24 24" class="h-7 w-7 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.3 6.2 21l1.6-6.8L2.4 9.6l6.9-.6L12 2.6l2.7 6.4 6.9.6-5.4 4.6 1.6 6.8z"/></svg>
+        <h3 class="mt-4 font-display text-lg font-600">Valós értékelések</h3><p class="mt-1.5 text-[15px] leading-relaxed text-pine/65">Elégedett ügyfelek visszajelzései, igazi családok, akiknek segítettünk.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ================= GYIK ================= -->
+  <section id="gyik" class="bg-pine text-ivory">
+    <div class="mx-auto max-w-3xl px-6 py-24">
+      <div class="reveal text-center">
+        <span class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">GYIK</span>
+        <h2 class="mt-4 font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">Gyakori kérdések</h2>
+      </div>
+
+      <div class="reveal mt-10 divide-y divide-ivory/10 border-y border-ivory/10">
+        <!-- q -->
+        <details class="group py-4" open>
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">Tudok fotók alapján árajánlatot kérni?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Igen. Küldjön néhány képet vagy rövid videót a helyiségekről, és ez alapján gyors, előzetes árat adunk, helyszíni felmérés nélkül is.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">El kell jönnöm a munkavégzéshez?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Nem szükséges. Megbeszélés alapján a munkát az Ön jelenléte nélkül is elvégezzük, akár a kulcsot is ránk bízhatja, a folyamatot fotóval és videóval dokumentáljuk.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">Milyen tárgyakat visztek el, és mit nem?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Bútort, háztartási gépet, lomot, pince- és padlástartalmat elszállítunk. A veszélyes hulladékot, vegyszereket, azbesztet külön, engedélyesen kezeljük, erről előre szólunk.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">A bútorokat szétszeditek? Emeletről, lift nélkül is?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Igen. A szétszerelés, a lépcsőn hordás és a lift nélküli elszállítás is a szolgáltatás része, a fizikai munka a miénk.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">Pincét és padlást is kiürítetek?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Igen, a pincétől a padlásig, a nehezen megközelíthető helyekre is bemegyünk.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">Mi történik az elszállított dolgokkal?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">A hulladékot engedéllyel rendelkező, jogszabály szerinti lerakóba visszük. A még értékes tárgyakat nem dobjuk ki automatikusan, egyeztetjük Önnel.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">Van értékbeszámítás vagy felvásárlás?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Igen. Értékesebb tárgyaknál (régiség, bútor, műtárgy) lehetséges a beszámítás vagy felvásárlás, ami érdemben csökkentheti a kiürítés végösszegét.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">Hagyatéki ingatlant is vállaltok? Külföldről is megszervezhető?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Igen, diszkréten és tapintattal. A folyamat távolról, akár külföldről is megszervezhető, egyetlen kapcsolattartóval.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">Adtok számlát, és előre végleges árat?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Igen. A fix árat előre közöljük, és nincs utólagos meglepetés a megbeszélt munkán felül. Minden esetben hivatalos számlát adunk.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex items-center justify-between gap-4"><span class="font-display text-lg font-600">Van sürgős vagy hétvégi kiszállás?</span><svg class="faq-plus h-5 w-5 shrink-0 text-amber-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-ivory/70">Igen, non-stop rendelkezésre állunk, a hét minden napján, sürgős esetben akár rövid határidővel.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VÉGSŐ CTA ================= -->
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <div class="reveal relative overflow-hidden rounded-[2.5rem] bg-pine px-8 py-16 text-center text-ivory">
+      <div class="absolute inset-0 hero-glow opacity-70"></div>
+      <div class="absolute inset-0 grain"></div>
+      <div class="relative">
+        <h2 class="mx-auto max-w-2xl font-display text-4xl font-500 leading-tight tracking-tight sm:text-5xl">A valódi termék nem a teherautó. Hanem a teher, ami lekerül Önről.</h2>
+        <p class="mx-auto mt-4 max-w-xl text-lg text-ivory/70">Kérjen azonnali becslést az AI árbecslőtől, vagy küldjön néhány fotót, a többit ránk bízhatja.</p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href="#ajanlat" data-quote-agent class="btn-cta inline-flex cursor-pointer items-center gap-2 rounded-full bg-amber px-8 py-4 text-base font-semibold text-pine transition-transform duration-200 hover:bg-amber-600 active:scale-95">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9L12 2z"/></svg>
+            Azonnali AI becslés
+          </a>
+          <a href="#ajanlat" class="cursor-pointer rounded-full border border-ivory/25 px-8 py-4 text-base font-semibold text-ivory transition-colors hover:bg-ivory/10">Ajánlatot kérek fotóval</a>
+          <a href="tel:+36706252014" class="cursor-pointer rounded-full border border-ivory/25 px-8 py-4 text-base font-semibold text-ivory transition-colors hover:bg-ivory/10">+36 70 625 2014</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LÁBLÉC ================= -->
+  <footer class="border-t border-pine/10 bg-ivory-300/40">
+    <div class="mx-auto max-w-6xl px-6 py-14">
+      <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div>
+          <a href="#top" class="flex items-center">
+            <img src="logo.png" alt="Banacraft" class="h-12 w-auto sm:h-14" />
+          </a>
+          <p class="mt-4 max-w-sm text-sm leading-relaxed text-pine/60">Teljes ingatlankiürítés a pincétől a padlásig, pakolással, elszállítással és rendezett átadással. Magánszemélyeknek, cégeknek, hagyatéki ügyekben.</p>
+        </div>
+        <div>
+          <h4 class="font-display text-sm font-600 uppercase tracking-widest text-pine/50">Kapcsolat</h4>
+          <ul class="mt-4 space-y-2 text-sm text-pine/70">
+            <li>1101 Budapest, Kőbányai út 43/A</li>
+            <li><a href="tel:+36706252014" class="transition-colors hover:text-pine">+36 70 625 2014</a></li>
+            <li><a href="mailto:info@banacraft.hu" class="transition-colors hover:text-pine">info@banacraft.hu</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display text-sm font-600 uppercase tracking-widest text-pine/50">Menü</h4>
+          <ul class="mt-4 space-y-2 text-sm text-pine/70">
+            <li><a href="#szolgaltatasok" class="transition-colors hover:text-pine">Szolgáltatások</a></li>
+            <li><a href="#folyamat" class="transition-colors hover:text-pine">Hogyan dolgozunk</a></li>
+            <li><a href="#hagyatek" class="transition-colors hover:text-pine">Hagyatéki kiürítés</a></li>
+            <li><a href="#velemenyek" class="transition-colors hover:text-pine">Vélemények</a></li>
+            <li><a href="#gyik" class="transition-colors hover:text-pine">GYIK</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="rule my-8"></div>
+      <div class="flex flex-col items-start justify-between gap-3 text-xs text-pine/50 sm:flex-row sm:items-center">
+        <p>Budapest, Pest, Fejér, Nógrád, Heves és Komárom-Esztergom vármegyében állunk rendelkezésre.</p>
+        <p>© <span id="ev"></span> Banacraft. Minden jog fenntartva.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- mobile sticky CTA -->
+  <a href="#ajanlat" class="btn-cta fixed bottom-4 left-4 right-4 z-40 flex items-center justify-center gap-2 rounded-full bg-amber px-6 py-3.5 text-base font-semibold text-pine sm:hidden">
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+    Előzetes ár fotó alapján
+  </a>
+
+  <!-- floating AI árbecslő launcher (placeholder, a valódi widget ezt válthatja ki) -->
+  <button type="button" data-quote-agent aria-label="Azonnali AI árbecslés"
+          class="group fixed bottom-5 right-5 z-40 hidden items-center gap-2.5 rounded-full bg-amber py-3.5 pl-4 pr-5 font-semibold text-pine shadow-xl shadow-pine/20 transition-transform duration-200 hover:-translate-y-0.5 sm:inline-flex">
+    <span class="grid h-7 w-7 place-items-center rounded-full bg-pine/10">
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9L12 2z"/></svg>
+    </span>
+    Azonnali árbecslés
+  </button>
+
+  <script>
+    document.getElementById('ev').textContent = new Date().getFullYear();
+
+    // scroll reveal, progressive enhancement.
+    // Content is visible by default; we only opt into the hidden/animated state
+    // once we've confirmed IntersectionObserver works. Any failure leaves the
+    // page fully visible instead of blank.
+    (function () {
+      var reveals = document.querySelectorAll('.reveal');
+      function showAll() { reveals.forEach(function (el) { el.classList.add('in'); }); }
+      try {
+        if (!('IntersectionObserver' in window)) return; // leave everything visible
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+        document.documentElement.classList.add('js'); // now safe to hide before revealing
+        reveals.forEach(function (el) { io.observe(el); });
+        // safety net: if anything is still hidden after 4s, reveal it
+        setTimeout(function () { reveals.forEach(function (el) { if (!el.classList.contains('in')) el.classList.add('in'); }); }, 4000);
+      } catch (err) {
+        document.documentElement.classList.remove('js');
+        showAll();
+      }
+    })();
+
+    // before / after slider
+    const range = document.getElementById('baRange');
+    const top = document.getElementById('baTop');
+    const handle = document.getElementById('baHandle');
+    if (range) {
+      range.addEventListener('input', () => {
+        const v = range.value;
+        top.style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0)';
+        handle.style.left = v + '%';
+      });
+    }
+
+    // ===== AI ÁRBECSLŐ (quoting agent), integration point =====
+    // The chatbot widget is added later. When embedded, it should register:
+    //   window.BanacraftQuoteAgent = { open: function () { /* open the chat */ } };
+    // Every CTA marked with data-quote-agent calls openQuoteAgent(). Until the
+    // widget is live, we gracefully fall back to the hero contact form so no
+    // click is ever a dead end.
+    window.openQuoteAgent = function () {
+      if (window.BanacraftQuoteAgent && typeof window.BanacraftQuoteAgent.open === 'function') {
+        window.BanacraftQuoteAgent.open();
+        return;
+      }
+      var form = document.getElementById('ajanlat');
+      if (!form) return;
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      form.classList.add('ring-4', 'ring-amber/50');
+      setTimeout(function () { form.classList.remove('ring-4', 'ring-amber/50'); }, 1300);
+      var first = document.getElementById('nev');
+      if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 650);
+    };
+    document.querySelectorAll('[data-quote-agent]').forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); window.openQuoteAgent(); });
+    });
+  </script>
+</body>
+</html>
