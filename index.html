@@ -1040,10 +1040,10 @@
   </script>
   <script src="https://banacraft-ingatlankiurites-quoting.vercel.app/widget.js"></script>
   <script>
-    // On phones, open the chat straight away, once per browser session, so
-    // closing it and reloading or navigating back doesn't keep reopening it.
+    // On desktop (not phones), open the chat straight away, once per browser
+    // session, so closing it and reloading doesn't keep reopening it.
     (function () {
-      if (!window.matchMedia || !window.matchMedia('(max-width: 600px)').matches) return;
+      if (!window.matchMedia || !window.matchMedia('(min-width: 601px)').matches) return;
       try { if (sessionStorage.getItem('bc_chat_autoopened')) return; } catch (e) {}
       var tries = 0;
       var poll = setInterval(function () {
