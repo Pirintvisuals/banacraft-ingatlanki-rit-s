@@ -963,19 +963,10 @@
   </footer>
 
   <!-- mobile sticky CTA -->
-  <a href="#ajanlat" class="btn-cta fixed bottom-4 left-4 right-4 z-40 flex items-center justify-center gap-2 rounded-full bg-amber px-6 py-3.5 text-base font-semibold text-pine sm:hidden">
+  <a href="#ajanlat" class="btn-cta fixed bottom-4 left-4 right-24 z-40 flex items-center justify-center gap-2 rounded-full bg-amber px-6 py-3.5 text-base font-semibold text-pine sm:hidden">
     <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
     Előzetes ár fotó alapján
   </a>
-
-  <!-- floating AI árbecslő launcher (placeholder, a valódi widget ezt válthatja ki) -->
-  <button type="button" data-quote-agent aria-label="Azonnali AI árbecslés"
-          class="group fixed bottom-5 right-5 z-40 hidden items-center gap-2.5 rounded-full bg-amber py-3.5 pl-4 pr-5 font-semibold text-pine shadow-xl shadow-pine/20 transition-transform duration-200 hover:-translate-y-0.5 sm:inline-flex">
-    <span class="grid h-7 w-7 place-items-center rounded-full bg-pine/10">
-      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9L12 2z"/></svg>
-    </span>
-    Azonnali árbecslés
-  </button>
 
   <script>
     document.getElementById('ev').textContent = new Date().getFullYear();
@@ -1038,15 +1029,13 @@
     });
   </script>
 
-  <!-- AI árbecslő widget: hijacks clicks on every [data-quote-agent] button in
-       capture phase, so the fallback above never actually fires once this is
-       loaded. Own launcher is off because the page already has one (see the
-       floating button before this script block). -->
+  <!-- AI árbecslő widget: shows its own floating chat bubble + teaser, and
+       hijacks clicks on every [data-quote-agent] button in capture phase, so
+       the fallback above never actually fires once this is loaded. -->
   <script>
     window.BANACRAFT_CONFIG = {
       apiUrl: "https://banacraft-ingatlankiurites-quoting.vercel.app/api/faq-agent",
-      assetsUrl: "https://banacraft-ingatlankiurites-quoting.vercel.app",
-      launcher: false
+      assetsUrl: "https://banacraft-ingatlankiurites-quoting.vercel.app"
     };
   </script>
   <script src="https://banacraft-ingatlankiurites-quoting.vercel.app/widget.js"></script>
